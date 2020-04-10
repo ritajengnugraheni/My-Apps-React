@@ -12,6 +12,8 @@ import Handmaid from './img/handmaid.png'
 import Crazy from './img/crazyRich.png';
 import Brave from './img/brave.png';
 import Educated from './img/educated.png';
+import Sprint from './img/sprint.png';
+import Hacking from './img/hacking.png';
 import './bootstrap.css'
 
 
@@ -88,13 +90,33 @@ function App() {
       image: Educated,
       stock: 3,
     },
+    {
+      author: "Tara Westover",
+      title: "Hacking Growth",
+      review: 4.5,
+      desc: `The definitive playbook by the pioneers of Growth Hacking, one of the hottest business methodologies...`,
+      price: 20.21,
+      discount: 0,
+      image: Hacking,
+      stock: 3,
+    },
+    {
+      author: "Jake Knapp",
+      title: "Sprint",
+      review: 4.5,
+      desc: ` Sprint: How to Solve Big Problems and Test New Ideas in Just Five Days by Jake Knapp.`,
+      price: 14.99,
+      discount: 50,
+      image: Sprint,
+      stock: 0,
+    },
   ];
 
   // Render buku 
 
   const renderBuku = () => {
     return arrBooks.map((val) => {
-      return    <div className='col-md-6'><BookCard namaBuku={val} /></div>
+      return    <div className='col-md-4'><BookCard namaBuku={val} /></div>
 
     })
   }

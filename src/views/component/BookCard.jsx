@@ -15,7 +15,7 @@ import { render } from "react-dom";
                  <>
 
                  <p className='font-color-grey'>{author}</p>
-                 <h4 className='font-weight-bold pb-0'>{title}</h4>
+                 <h4 className='font-weight-bold pb-0'style={{fontSize: '20px'}}>{title}</h4>
                  <p style={{fontSize:'12px'}}><span >&#11088;</span>  {review}/5 Review</p>
                  <input className='tersedia' style={{fontSize:'10px'}} type="button" value="Available" disabled/>
                  <p style={{fontSize:'14px'}}>{desc}</p>
@@ -37,7 +37,7 @@ import { render } from "react-dom";
              return(
                  <>
                  <p className='font-color-grey'>{author}</p>
-                 <h4 className='font-weight-bold'>{title}</h4>
+                 <h4 className='font-weight-bold' style={{fontSize: '20px'}}>{title}</h4>
                  <p style={{fontSize: '12px'}}><span>&#11088;</span>  {review}/5 Review</p>
                  <input className='habis' style={{fontSize:'10px'}} type="button" value="Sold Out" disabled/>
                  <p style={{fontSize:'14px'}}>{desc}</p>
@@ -60,14 +60,14 @@ import { render } from "react-dom";
      
      return (
          <div className='container'>
-                 <div className="row " >
-                        <div className="col-md-6 order-md-1 ">
-                            <center>
-                            <img src={image} alt="" style={{ width:"250px", height:"350px"}}/>
-                            </center>
+                 <div className="row " style={{}} >
+                        <div className="col-md-3 order-md-1  " style={{marginRight: '0px'}}>
+                            <div className="text-right">
+                                <img src={image} alt="" style={{ width:"150px", height:"250px"}}/>
+                            </div>
                         
                          </div>
-                         <div className="col-md-5 order-md-2 pb-4  book-card ">
+                         <div className="col-md-7 order-md-2 ml-auto pb-4  " style={{marginBottom: '40px'}}>
                              {renderItem()}
                          </div>
              </div>  
