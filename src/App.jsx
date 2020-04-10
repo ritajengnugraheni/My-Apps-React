@@ -62,7 +62,7 @@ function App() {
       author: "Kevin Kwan",
       title: "Crazy Rich Asians",
       review: 5,
-      desc: `the outrageously funny debut novel about three super-rich, pedigreed Chinese families and the gossip...`,
+      desc: `The outrageously funny debut novel about three super-rich, pedigreed Chinese families and the gossip...`,
       price: 24.12,
       discount: 80,
       image: Crazy,
@@ -72,7 +72,7 @@ function App() {
       author: "Aldous Huxley",
       title: "Brave New World",
       review: 3,
-      desc: `dystopian novel written in 1931 by English author Aldous Huxley, and published in 1932. Largely set in...`,
+      desc: `Dystopian novel written in 1931 by English author Aldous Huxley, and published in 1932. Largely set in...`,
       price: 18.99,
       discount: 60,
       image: Brave,
@@ -139,9 +139,20 @@ function App() {
   return (
     <div>
       <div className="App">
-            <h1 style={{ color: '#0a8fb4', marginTop:'20px'}} className='font-weight-bold'><span style={{fontSize: '30px'}}>&#128218;</span> Book Store <span style={{fontSize:'30px'}}>&#128218;</span></h1>
+             <div class="container " >
+                    <nav className="fixed-top navbar-expand-sm bg-light ">
+                       <div className="col-12 col-md-12  d-xl-block">
+                        <div className="row align-items-center navigasi">
+                                <div className="col-md-12 mb-2 order-md-1 mb-lg-0">
+                                   <h1 style={{ color: '#0a8fb4', marginTop:'20px'}} className='font-weight-bold'><span style={{fontSize: '30px'}}>&#128218;</span> Book Store <span style={{fontSize:'30px'}}>&#128218;</span></h1>
+                                </div>                 
+                        </div>
+                       </div>    
+                    </nav>
+            </div>       
+            
       </div>
-      <div style={{marginLeft:'10px', marginTop:'50px'}}>
+      <div style={{marginLeft:'10px', marginTop:'120px'}}>
          {renderBuku()}
       </div>
     </div>
