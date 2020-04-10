@@ -62,7 +62,7 @@ import { render } from "react-dom";
          <div className='container'>
                  <div className="row " style={{}} >
                         <div className="col-md-3 order-md-1  " style={{marginRight: '0px'}}>
-                            <div className="text-right">
+                            <div className="text-center">
                                 <img src={image} alt="" style={{ width:"150px", height:"250px"}}/>
                             </div>
                         

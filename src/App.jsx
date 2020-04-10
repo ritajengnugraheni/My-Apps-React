@@ -104,7 +104,8 @@ function App() {
       author: "Jake Knapp",
       title: "Sprint",
       review: 4.5,
-      desc: ` Sprint: How to Solve Big Problems and Test New Ideas in Just Five Days by Jake Knapp.`,
+      desc: ` “Read this book and do what it says if you want to build better products faster.”
+      EV WILLIAMS, founder of Medium & Twitter.`,
       price: 14.99,
       discount: 50,
       image: Sprint,
