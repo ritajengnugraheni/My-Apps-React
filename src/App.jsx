@@ -94,7 +94,7 @@ function App() {
 
   const renderBuku = () => {
     return arrBooks.map((val) => {
-      return <BookCard namaBuku={val} />
+      return    <div className='col-md-6'><BookCard namaBuku={val} /></div>
 
     })
   }
@@ -153,7 +153,8 @@ function App() {
             
       </div>
       <div style={{marginLeft:'10px', marginTop:'120px'}}>
-         {renderBuku()}
+         <div className="row"> {renderBuku()}
+           </div>
       </div>
     </div>
 

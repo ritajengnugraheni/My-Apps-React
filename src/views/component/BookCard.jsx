@@ -61,20 +61,15 @@ import { render } from "react-dom";
      return (
          <div className='container'>
                  <div className="row " >
-                   
-                        <div className="col-md-5 order-md-1 ">
+                        <div className="col-md-6 order-md-1 ">
                             <center>
                             <img src={image} alt="" style={{ width:"250px", height:"350px"}}/>
                             </center>
                         
                          </div>
-                         <div className="col-md-7 order-md-2 ml-auto pb-4  book-card ">
+                         <div className="col-md-5 order-md-2 pb-4  book-card ">
                              {renderItem()}
                          </div>
-               
-                      
-                   
-                   
              </div>  
            
          </div>
