@@ -20,6 +20,7 @@ import LoginScreen from './views/screen/LoginScreen';
 
 
 
+
 function App() {
   // render array 
   // let arr = ['Bandung', 'Jakarta', 'Tangerang'];
@@ -197,6 +198,7 @@ function App() {
     <div className="App">
       <h1 className='font-weight-bold' style={{color: 'grey'}}>Website</h1>
       <LoginScreen/>
+      
     </div>
 
   );
