@@ -15,6 +15,8 @@ import Educated from './img/educated.png';
 import Sprint from './img/sprint.png';
 import Hacking from './img/hacking.png';
 import './bootstrap.css'
+import Inputscreen from './views/screen/InputScreen';
+import LoginScreen from './views/screen/LoginScreen';
 
 
 
@@ -49,78 +51,78 @@ function App() {
   // ]
 
   // Array Buku
-  let arrBooks = [
-    {
-      author: "Margaret Atwood",
-      title: "The Handmaid's Tale",
-      review: 4,
-      desc: `This novel can be interpreted as a double narrative, Offred's tale and the handmaids' tales. The night...`,
-      price: 18.99,
-      discount: 60,
-      image: Handmaid,
-      stock: 7,
-    },
-    {
-      author: "Kevin Kwan",
-      title: "Crazy Rich Asians",
-      review: 5,
-      desc: `The outrageously funny debut novel about three super-rich, pedigreed Chinese families and the gossip...`,
-      price: 24.12,
-      discount: 80,
-      image: Crazy,
-      stock: 0,
-    },
-    {
-      author: "Aldous Huxley",
-      title: "Brave New World",
-      review: 3,
-      desc: `Dystopian novel written in 1931 by English author Aldous Huxley, and published in 1932. Largely set in...`,
-      price: 18.99,
-      discount: 60,
-      image: Brave,
-      stock: 3,
-    },
-    {
-      author: "Tara Westover",
-      title: "Educated",
-      review: 4.5,
-      desc: `It is a tale of fierce family loyalty and of the grief that comes with severing the closest of ties. With...`,
-      price: 34.21,
-      discount: 0,
-      image: Educated,
-      stock: 3,
-    },
-    {
-      author: "Tara Westover",
-      title: "Hacking Growth",
-      review: 4.5,
-      desc: `The definitive playbook by the pioneers of Growth Hacking, one of the hottest business methodologies...`,
-      price: 20.21,
-      discount: 0,
-      image: Hacking,
-      stock: 3,
-    },
-    {
-      author: "Jake Knapp",
-      title: "Sprint",
-      review: 4.5,
-      desc: ` “Read this book and do what it says if you want to build better products faster.”
-      EV WILLIAMS, founder of Medium & Twitter.`,
-      price: 14.99,
-      discount: 50,
-      image: Sprint,
-      stock: 0,
-    },
-  ];
+  // let arrBooks = [
+  //   {
+  //     author: "Margaret Atwood",
+  //     title: "The Handmaid's Tale",
+  //     review: 4,
+  //     desc: `This novel can be interpreted as a double narrative, Offred's tale and the handmaids' tales. The night...`,
+  //     price: 18.99,
+  //     discount: 60,
+  //     image: Handmaid,
+  //     stock: 7,
+  //   },
+  //   {
+  //     author: "Kevin Kwan",
+  //     title: "Crazy Rich Asians",
+  //     review: 5,
+  //     desc: `The outrageously funny debut novel about three super-rich, pedigreed Chinese families and the gossip...`,
+  //     price: 24.12,
+  //     discount: 80,
+  //     image: Crazy,
+  //     stock: 0,
+  //   },
+  //   {
+  //     author: "Aldous Huxley",
+  //     title: "Brave New World",
+  //     review: 3,
+  //     desc: `Dystopian novel written in 1931 by English author Aldous Huxley, and published in 1932. Largely set in...`,
+  //     price: 18.99,
+  //     discount: 60,
+  //     image: Brave,
+  //     stock: 3,
+  //   },
+  //   {
+  //     author: "Tara Westover",
+  //     title: "Educated",
+  //     review: 4.5,
+  //     desc: `It is a tale of fierce family loyalty and of the grief that comes with severing the closest of ties. With...`,
+  //     price: 34.21,
+  //     discount: 0,
+  //     image: Educated,
+  //     stock: 3,
+  //   },
+  //   {
+  //     author: "Tara Westover",
+  //     title: "Hacking Growth",
+  //     review: 4.5,
+  //     desc: `The definitive playbook by the pioneers of Growth Hacking, one of the hottest business methodologies...`,
+  //     price: 20.21,
+  //     discount: 0,
+  //     image: Hacking,
+  //     stock: 3,
+  //   },
+  //   {
+  //     author: "Jake Knapp",
+  //     title: "Sprint",
+  //     review: 4.5,
+  //     desc: ` “Read this book and do what it says if you want to build better products faster.”
+  //     EV WILLIAMS, founder of Medium & Twitter.`,
+  //     price: 14.99,
+  //     discount: 50,
+  //     image: Sprint,
+  //     stock: 0,
+  //   },
+  // ];
 
-  // Render buku 
+  // // Render buku 
 
-  const renderBuku = () => {
-    return arrBooks.map((val) => {
-      return    <div className='col-md-4'><BookCard namaBuku={val} /></div>
+  // const renderBuku = () => {
+  //   return arrBooks.map((val) => {
+  //     return    <div className='col-md-4'><BookCard namaBuku={val} /></div>
 
-    })
-  }
+  //   })
+  // }
 
   // Render objek
   // const renderProduct =()=>{
@@ -160,25 +162,41 @@ function App() {
 
 
   return (
-    <div>
-      <div className="App">
-             <div class="container " >
-                    <nav className="fixed-top navbar-expand-sm bg-light ">
-                       <div className="col-12 col-md-12  d-xl-block">
-                        <div className="row align-items-center navigasi">
-                                <div className="col-md-12 mb-2 order-md-1 mb-lg-0">
-                                   <h1 style={{ color: '#0a8fb4', marginTop:'20px'}} className='font-weight-bold'><span style={{fontSize: '30px'}}>&#128218;</span> Book Store <span style={{fontSize:'30px'}}>&#128218;</span></h1>
-                                </div>                 
-                        </div>
-                       </div>    
-                    </nav>
-            </div>       
+    // <div>
+    //   <div className="App">
+    //          <div class="container " >
+    //                 <nav className="fixed-top navbar-expand-sm bg-light ">
+    //                    <div className="col-12 col-md-12  d-xl-block">
+    //                     <div className="row align-items-center navigasi">
+    //                             <div className="col-md-12 mb-2 order-md-1 mb-lg-0">
+    //                                <h1 style={{ color: '#0a8fb4', marginTop:'20px'}} className='font-weight-bold'><span style={{fontSize: '30px'}}>&#128218;</span> Book Store <span style={{fontSize:'30px'}}>&#128218;</span></h1>
+    //                             </div>                 
+    //                     </div>
+    //                    </div>    
+    //                 </nav>
+    //         </div>       
             
-      </div>
-      <div style={{marginLeft:'10px', marginTop:'120px'}}>
-         <div className="row"> {renderBuku()}
-           </div>
-      </div>
+    //   </div>
+    //   <div style={{marginLeft:'10px', marginTop:'120px'}}>
+    //      <div className="row"> {renderBuku()}
+    //        </div>
+    //   </div>
+    // </div>
+
+    // Counter screen 
+    // <div className="App">
+    //   <CounterScreen/>
+    // </div>
+
+    // input screen 
+    // <div className="App">
+    //   <Inputscreen/>
+    // </div>
+
+
+    <div className="App">
+      <h1 className='font-weight-bold' style={{color: 'grey'}}>Website</h1>
+      <LoginScreen/>
     </div>
 
   );
