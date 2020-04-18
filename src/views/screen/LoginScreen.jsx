@@ -1,115 +1,112 @@
-import React from 'react'
+import React from "react"
+import Axios from "axios";
+import { API_URL } from "../../constants/API"
+import {Link, Redirect} from "react-router-dom";
 
-class LoginScreen extends React.Component{
-    constructor (props){
-        super(props)
-        this.state = {
-            person :[],
-            person1:[],
-            username:'',
-            password:'',
-            repeatpass:'',
-            usernameInput1:'',
-            passwordInput1:'',
-            teks : ""
-        }
+class LoginScreen extends React.Component {
+    state = {
+        usernameInput: "",
+        passwordInput: "",
+        // userList: [],
+        loginIs: true,
+        usernameSekarang:""
     }
-   
-    render(){
-        const {username, password, repeatpass}= this.state
-        const {usernameInput1, passwordInput1}= this.state
-        const personBaru = {'username' : username, 'password' : password, 'repeatpass' : repeatpass}
-        const personaBaru1 = {'usernameInput1': usernameInput1, 'pasawordInput1' : passwordInput1}
-        let submit = this.state.person.concat(personBaru)
-        let submit1 = this.state.person1.concat(personaBaru1)
-
-        const InputHandler =(event, field)=>{
-            this.setState({[field]:event.target.value})
-        }
-
-        const LoginHandler =(event, field)=>{
-            this.setState({[field]:event.target.value})
-        }
-     
-            
-        const Register =()=>{
-           
-            
-            this.setState({person : submit})
-            console.log(this.state.person);
-            if (password !== repeatpass){
-                return alert ('Mohon maaf password tidak sama silahkan ulang')
-            } else {
-                return alert ('Registrasi berhasil')
+    inputHandler = (e, field) => {
+        this.setState({ [field]: e.target.value });
+    };
+    getDataHandler = () => {
+        const { usernameInput, passwordInput} = this.state
+        Axios.get(`${API_URL}/users`, {
+            params: {
+                username: usernameInput,
+                password: passwordInput,
             }
-        }
-        
-      
+        })
 
-       const loginweb =()=> {
-        //    alert('cek Masuk')
-        this.setState({person1 : submit1})
-           const usernameInput = this.state.usernameInput1
-           const passwordInput = this.state.passwordInput1
+            .then((res) => {
+                if (res.data.length == 0) {
+                    alert('Password atau username salah!')
+                    this.setState({
+                        loginIs: true,
+                        usernameInput: "",
+                        passwordInput: "",
+                        roleInput: "",
+                        fullnameInput: ""
+                    })
+                } else {
+                    this.setState({
+                        loginIs: false,
+                        usernameSekarang : usernameInput,
+                        usernameInput: "",
+                        passwordInput: "",
+                        roleInput: "",
+                        fullnameInput: ""
+                    })
+                    // this.setState({ userList: res.data })
+                    alert("SUCCESS!")
+                    console.log(res);
+                }
 
-           var findUser = this.state.person.find(val=>{
-               return val.username == usernameInput
-           })
+            })
 
-           var indexUser=this.state.person.findIndex((val)=>{
-               return val.username == usernameInput
-           })
-           
-           var indexPassword=this.state.person.findIndex(val=>{
-               return val.password == passwordInput
-           })
-           
-           console.log(this.state.person);
-           
-        //    {
-        //        indexUser == indexPassword && findUser ?
-        //         this.setState({teks : `Hallo ${usernameInput.toUpperCase()}`}): alert (`Cek Kembali Username atau Password`) 
-        //    }
-            if(indexUser == indexPassword && findUser){
-                this.setState({teks : `hallo ${usernameInput}`})
-            }else{
-                alert('username atau password salah')
-                this.setState({teks : ''})
-            }
+            .catch((err) => {
+                console.log(err);
+
+            })
     }
-           
-           
-           
-    //    }
-        return(
-        <div className="container  d-flex flex-column justify-content-center align-items-center  mt-4 mb-2" style={{width:'auto'}}>
+    render() {
+        const {
+            usernameInput,
+            passwordInput,
+            usernameSekarang,
+            loginIs
+        } = this.state
 
-                    <div className='bg-grey '>
-                        <h5>Register</h5>
-                        
-                            <input   className='form-control mb-2'  type="text" name="" id="" placeholder="Username" onChange={(e) => InputHandler(e, 'username')} />
-                            <input className='form-control mb-2' type="text" name="" id="" placeholder= "Password" onChange={(e) => InputHandler(e, 'password')} />
-                            <input   className='form-control mb-2' type="text" name="" id="" placeholder="Repeat Password " onChange={(e) => InputHandler(e, 'repeatpass')} />
-                            <input className='btn btn-info mb-2' type="button" value="Register" onClick={Register}/>
-                     </div>
-                     <div className='bg-grey'>
-                            <h5>Login</h5>
-                            <input className='form-control mb-2' type="text" name="" id="" placeholder="Username" onChange={(e)=>LoginHandler(e,'usernameInput1')}/>
-                            <input className='form-control mb-2'  type="password" name="" id="" placeholder= "Password" onChange={(e)=> LoginHandler(e,'passwordInput1' )}/>
-                            <input style={{margin: '5px'}} className='btn btn-info' type="button" value="Login" onClick={loginweb}/>
+        if (loginIs) {
+            return (
+                <div className="container d-flex flex-column justify-content-center align-items-center  mt-4 mb-2" style={{ width: 'auto' }}>
+                    <h1 className="text-uppercase font-weight-bold" style={{ color: "green" }}>Login Page</h1>
+                    <div className="bg-grey">
+                        <input type="text"
+                            className="form-control p-2 mb-2"
+                            name=""
+                            id=""
+                            placeholder="Username"
+                            value={usernameInput}
+                            onChange={(e) => this.inputHandler(e, "usernameInput")}
+                        />
+                        <input type="password"
+                            className="form-control p-2 mb-2"
+                            name=""
+                            id=""
+                            value={passwordInput}
+                            placeholder="Password"
+                            onChange={(e) => this.inputHandler(e, "passwordInput")}
+                        />
+                        <center>
+                            {/* <Link to='/home'> */}
+                            <input
+                                type="button"
+                                className="btn btn-success"
+                                value="Login"
+                                onClick={this.getDataHandler}
+                            />
+                            {/* </Link> */}
+                          
+                        </center>
+
                     </div>
-                            <h5>{this.state.teks}</h5>
-        </div>
-           
-             
+
+                </div>
+            )
+        } else {
+            return (
+                <Redirect to={'/home/'+ usernameSekarang}/>
+            )
             
-    
-      
-        )
+        }
+
+
     }
-
-
-
 }
-
 export default LoginScreen

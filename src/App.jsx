@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route, withRouter } from "react-router-dom"
+
 import logo from './logo.svg';
 import './App.css';
 import NewScreen from './views/screen/NewScreen';
@@ -16,6 +18,14 @@ import Sprint from './img/sprint.png';
 import Hacking from './img/hacking.png';
 import './bootstrap.css'
 import Inputscreen from './views/screen/InputScreen';
+
+import AuthScreen from './views/screen/AuthScreen';
+import LifecycleScreen from './views/screen/LifecycleScreen';
+import HomeScreen from './views/screen/HomeScreen';
+import PageNotFound from './views/screen/PageNotFound';
+import Navbar from './views/component/Navbar';
+import ProfileScreen from './views/screen/ProfileScreen';
+import RegisScreen from './views/screen/RegisScreen';
 import LoginScreen from './views/screen/LoginScreen';
 
 
@@ -176,7 +186,7 @@ function App() {
     //                    </div>    
     //                 </nav>
     //         </div>       
-            
+
     //   </div>
     //   <div style={{marginLeft:'10px', marginTop:'120px'}}>
     //      <div className="row"> {renderBuku()}
@@ -195,13 +205,33 @@ function App() {
     // </div>
 
 
-    <div className="App">
-      <h1 className='font-weight-bold' style={{color: 'grey'}}>Website</h1>
-      <LoginScreen/>
-      
-    </div>
+    // // <div className="App">
+    //   {/* <h1 className='font-weight-bold' style={{color: 'grey'}}>Halloo World</h1> */}
+    //   {/* <LoginScreen/> */}
+    //   {/* <AuthScreen/> */}
+    //   {/* <LifecycleScreen/> */}
+
+    // // </div>
+
+    <>
+      {/* <LifecycleScreen/> */}
+      {/* <HomeScreen/> */}
+      <Navbar />
+      <Switch>
+        {/* <Route exact path="/" component={HomeScreen}/>
+        <Route exact path="/auth" component={AuthScreen}/>
+        <Route exact path="/input" component={Inputscreen}/>
+        <Route exact path="/counter" component={CounterScreen}/>
+        <Route exact path="/profil/:username" component={ProfileScreen}/> */}
+        <Route exact path="/regis" component={RegisScreen} />
+        <Route exact path="/login" component={LoginScreen} />
+        <Route exact path="/home/:username" component={HomeScreen} />
+        <Route exact path="/*" component={PageNotFound} />
+
+      </Switch>
+    </>
 
   );
   //========================
 }
-export default App;
+export default withRouter(App);

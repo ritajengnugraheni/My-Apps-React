@@ -1,0 +1,34 @@
+{
+  "posts": [],
+  "comments": [],
+  "users": [
+    {
+      "id": 1,
+      "username": "jakeknapp",
+      "password": "password",
+      "fullname": "Jake Knapp",
+      "role": "Designer"
+    },
+    {
+      "id": 2,
+      "username": "markzuckerberg",
+      "password": "password",
+      "fullname": "Mark Zukerberg",
+      "role": "Wong Sugeh"
+    },
+    {
+      "username": "ajeng",
+      "password": "password",
+      "role": "Designer",
+      "fullname": "Rita Ajeng Nugraheni",
+      "id": 3
+    },
+    {
+      "username": "sidikkunto",
+      "password": "sidikunto",
+      "role": "Supervisor",
+      "fullname": "Sidik Kunto Bisono",
+      "id": 4
+    }
+  ]
+}
