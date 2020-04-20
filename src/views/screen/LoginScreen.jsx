@@ -1,21 +1,22 @@
 import React from "react"
 import Axios from "axios";
 import { API_URL } from "../../constants/API"
-import {Link, Redirect} from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import swal from "sweetalert";
+
 
 class LoginScreen extends React.Component {
     state = {
         usernameInput: "",
         passwordInput: "",
-        // userList: [],
-        loginIs: true,
-        usernameSekarang:""
+        loginIs: false,
+      
     }
     inputHandler = (e, field) => {
         this.setState({ [field]: e.target.value });
     };
     getDataHandler = () => {
-        const { usernameInput, passwordInput} = this.state
+        const { usernameInput, passwordInput } = this.state
         Axios.get(`${API_URL}/users`, {
             params: {
                 username: usernameInput,
@@ -25,9 +26,9 @@ class LoginScreen extends React.Component {
 
             .then((res) => {
                 if (res.data.length == 0) {
-                    alert('Password atau username salah!')
+                    swal("Password atau username salah", " ", "error")
                     this.setState({
-                        loginIs: true,
+                        loginIs: false,
                         usernameInput: "",
                         passwordInput: "",
                         roleInput: "",
@@ -35,15 +36,10 @@ class LoginScreen extends React.Component {
                     })
                 } else {
                     this.setState({
-                        loginIs: false,
-                        usernameSekarang : usernameInput,
-                        usernameInput: "",
-                        passwordInput: "",
-                        roleInput: "",
-                        fullnameInput: ""
+                        loginIs: true,
+                        usernameInput,
                     })
-                    // this.setState({ userList: res.data })
-                    alert("SUCCESS!")
+                    swal("Success!", "", "success")
                     console.log(res);
                 }
 
@@ -58,11 +54,10 @@ class LoginScreen extends React.Component {
         const {
             usernameInput,
             passwordInput,
-            usernameSekarang,
             loginIs
         } = this.state
 
-        if (loginIs) {
+        if (!loginIs) {
             return (
                 <div className="container d-flex flex-column justify-content-center align-items-center  mt-4 mb-2" style={{ width: 'auto' }}>
                     <h1 className="text-uppercase font-weight-bold" style={{ color: "green" }}>Login Page</h1>
@@ -92,7 +87,7 @@ class LoginScreen extends React.Component {
                                 onClick={this.getDataHandler}
                             />
                             {/* </Link> */}
-                          
+
                         </center>
 
                     </div>
@@ -101,9 +96,9 @@ class LoginScreen extends React.Component {
             )
         } else {
             return (
-                <Redirect to={'/home/'+ usernameSekarang}/>
+                <Redirect to={'/home/' + usernameInput} />
             )
-            
+
         }
 
 

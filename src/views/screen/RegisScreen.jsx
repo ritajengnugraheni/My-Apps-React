@@ -1,6 +1,8 @@
 import React from "react";
 import Axios from "axios";
 import { API_URL } from "../../constants/API"
+import {Button ,Spinner} from "reactstrap"
+import swal from "sweetalert";
 
 class RegisScreen extends React.Component {
     state = {
@@ -8,46 +10,58 @@ class RegisScreen extends React.Component {
         passwordInput: "",
         fullnameInput: "",
         roleInput: "",
-        userList: []
+        isLoading:false,
+        // userList: []
     }
+
+    
 
     inputHandler = (e, field) => {
         this.setState({ [field]: e.target.value });
     };
 
+   
+    
     getDataHandler = () => {
+        this.setState({ isLoading: true });
         const { usernameInput } = this.state
-        Axios.get(`${API_URL}/users`, {
-            params: {
-                username: usernameInput
-            }
-        })
-            .then((res) => {
-                if (res.data.length == 0) {
-                    alert("SUCCESS")
-                    this.postDataHandler()
-                      this.setState({
-                        usernameInput: "",
-                        passwordInput: "",
-                        roleInput: "",
-                        fullnameInput: ""
-                    })
-                } else {
-                    alert("Username sudah digunakan")
-                    this.setState({
-                        usernameInput: "",
-                        passwordInput: "",
-                        roleInput: "",
-                        fullnameInput: ""
-                    })
+        setTimeout(() => {
+            Axios.get(`${API_URL}/users`, {
+                params: {
+                    username: usernameInput
                 }
-                console.log(res);
-
             })
-            .catch((err) => {
-                console.log(err);
-
-            })
+                .then((res) => {
+                    if (res.data.length == 0) {
+                        swal("Success!", "", "success")
+                        this.postDataHandler()
+                          this.setState({
+                            usernameInput: "",
+                            passwordInput: "",
+                            roleInput: "",
+                            fullnameInput: "",
+                            isLoading:false
+                        })
+                    } else {
+                        swal("Username sudah digunakan", " ", "error")
+                        this.setState({
+                            usernameInput: "",
+                            passwordInput: "",
+                            roleInput: "",
+                            fullnameInput: "",
+                            isLoading:false
+                        })
+                    }
+                    console.log(res);
+    
+                })
+                .catch((err) => {
+                    console.log(err);
+                    this.setState({isLoading:false})
+    
+                })
+        }, 1500);
+      
     }
     postDataHandler = () => {
         const { usernameInput, passwordInput, fullnameInput, roleInput } = this.state
@@ -67,6 +81,9 @@ class RegisScreen extends React.Component {
             })
     }
 
+   
+       
+    
     render() {
         const {
             usernameInput,
@@ -107,11 +124,16 @@ class RegisScreen extends React.Component {
                         placeholder="Password"
                         onChange={(e) => this.inputHandler(e, "passwordInput")} />
                     <center>
-                        <input
+                        
+                            <input
                             type="button"
                             className="btn btn-success"
                             value="Registrasi"
-                            onClick={this.getDataHandler} />
+                            onClick={this.getDataHandler}
+                            disabled={this.state.isLoading}
+                            />
+                        
+                     
                     </center>
 
                 </div>
