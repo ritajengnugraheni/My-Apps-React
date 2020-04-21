@@ -3,6 +3,12 @@ import Axios from "axios";
 import { API_URL } from "../../constants/API"
 import { Link, Redirect } from "react-router-dom";
 import swal from "sweetalert";
+import { connect } from "react-redux";
+import {
+  todoInputHandler,
+  usernameInputHandler,getUsernameHandler
+  ,
+} from "../../redux/actions";
 
 
 class LoginScreen extends React.Component {
@@ -31,8 +37,6 @@ class LoginScreen extends React.Component {
                         loginIs: false,
                         usernameInput: "",
                         passwordInput: "",
-                        roleInput: "",
-                        fullnameInput: ""
                     })
                 } else {
                     this.setState({
@@ -41,6 +45,7 @@ class LoginScreen extends React.Component {
                     })
                     swal("Success!", "", "success")
                     console.log(res);
+                    this.props.onLogin(res.data[0].fullname)
                 }
 
             })
@@ -104,4 +109,20 @@ class LoginScreen extends React.Component {
 
     }
 }
-export default LoginScreen
+const mapStateToProps = (state) => {
+    return {
+      todo: state.haha,
+      user: state.user,
+    };
+  };
+  
+  // Supaya action bisa diakses component lewat props
+  // dan action bisa berhubungan dengan reducer
+  const mapDispatchToProps = {
+    onChangeTodo: todoInputHandler,
+    onChangeUsername: usernameInputHandler,
+    onLogin : getUsernameHandler
+    // onAddTodo: addTodoHandler,
+  };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

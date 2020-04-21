@@ -27,6 +27,7 @@ import Navbar from './views/component/Navbar';
 import ProfileScreen from './views/screen/ProfileScreen';
 import RegisScreen from './views/screen/RegisScreen';
 import LoginScreen from './views/screen/LoginScreen';
+import TodoReduxScreen from './views/screen/TodoReduxScreen';
 
 
 
@@ -226,7 +227,10 @@ function App() {
         <Route exact path="/regis" component={RegisScreen} />
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/home/:username" component={HomeScreen} />
+        <Route exact path="/input" component={Inputscreen}/>
+        {/* <Route exact path="/todo" component={TodoReduxScreen}/> */}
         <Route exact path="/*" component={PageNotFound} />
+        
 
       </Switch>
     </>

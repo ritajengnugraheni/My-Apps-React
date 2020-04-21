@@ -10,7 +10,7 @@ class Navbar extends React.Component {
                 <Link style={{color:"green"}} to="/login" >Login</Link>
                 {/* <Link to="/counter" >Counter</Link>
                 <Link to="/profil/:username" >Profile</Link> */}
-                {this.props.todo.todoInput}
+                {this.props.user.usernameInput}
             </div>
         )
     }
@@ -18,6 +18,7 @@ class Navbar extends React.Component {
 const mapStateToProps = state =>{
     return {
         todo: state.todo,
+        user: state.user
     }
 }
 export default connect(mapStateToProps)(Navbar)

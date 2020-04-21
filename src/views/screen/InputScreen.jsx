@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {connect} from 'react-redux'
 
 class InputScreen extends React.Component{
     state ={
@@ -14,8 +15,9 @@ class InputScreen extends React.Component{
         }
  
         return (
-            <div>
+            <div className="container">
                 <h1>Input Screen</h1>
+                <h1>{this.props.akses.todoInput}</h1>
                 <h3>Welcome {username}</h3>
                 <h3>Email : {email}</h3>
                 <input type="text" 
@@ -39,12 +41,21 @@ class InputScreen extends React.Component{
                
                 <textarea onChange ={(e) => InputHandler (e, 'text')} name="" id="" cols="30" rows="10"></textarea>
                 <p>{text.length}/140</p>
+                
 
                 
             </div>
+             
+
         )
     }
+    
 
 }
+const mapStateToProps = state =>{
+    return {
+        akses: state.todo,
+    }
+}
 
-export default InputScreen
+export default connect(mapStateToProps)(InputScreen)
