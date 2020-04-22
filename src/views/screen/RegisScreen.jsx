@@ -124,27 +124,27 @@ class RegisScreen extends React.Component {
                         name=""
                         id=""
                         placeholder="Username"
-                        // value={usernameInput}
+                        value={usernameInput}
                         onChange={(e) => this.inputHandler(e, "username")} />
                     <input type="text"
                         className="form-control p-2 mb-2"
                         name=""
                         id=""
-                        // value={fullnameInput}
+                        value={fullnameInput}
                         placeholder="Full Name"
                         onChange={(e) => this.inputHandler(e, "fullname")} />
                     <input type="text"
                         className="form-control p-2 mb-2"
                         name=""
                         id=""
-                        // value={roleInput}
+                        value={roleInput}
                         placeholder="Role Job"
                         onChange={(e) => this.inputHandler(e, "role")} />
                     <input type="text"
                         className="form-control p-2 mb-2"
                         name=""
                         id=""
-                        // value={passwordInput}
+                        value={passwordInput}
                         placeholder="Password"
                         onChange={(e) => this.inputHandler(e, "password")} />
                     <center>
