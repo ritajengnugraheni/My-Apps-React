@@ -6,59 +6,38 @@ import swal from "sweetalert";
 import { connect } from "react-redux";
 import {
   todoInputHandler,
-  usernameInputHandler,getUsernameHandler
+  usernameInputHandler,getUsernameHandler, loginHendler
   ,
 } from "../../redux/actions";
 
 
+
 class LoginScreen extends React.Component {
     state = {
-        usernameInput: "",
-        passwordInput: "",
+        username: "",
+        password: "",
         loginIs: false,
+        loginPrifile:{},
       
     }
     inputHandler = (e, field) => {
         this.setState({ [field]: e.target.value });
     };
     getDataHandler = () => {
-        const { usernameInput, passwordInput } = this.state
-        Axios.get(`${API_URL}/users`, {
-            params: {
-                username: usernameInput,
-                password: passwordInput,
-            }
-        })
+        const { username, password } = this.state
 
-            .then((res) => {
-                if (res.data.length == 0) {
-                    swal("Password atau username salah", " ", "error")
-                    this.setState({
-                        loginIs: false,
-                        usernameInput: "",
-                        passwordInput: "",
-                    })
-                } else {
-                    this.setState({
-                        loginIs: true,
-                        usernameInput,
-                    })
-                    swal("Success!", "", "success")
-                    console.log(res);
-                    this.props.onLogin(res.data[0].fullname)
-                }
+        const userData = {
+            username,
+            password
+        }
 
-            })
-
-            .catch((err) => {
-                console.log(err);
-
-            })
+        this.props.onLogin(userData)
+      
     }
     render() {
         const {
-            usernameInput,
-            passwordInput,
+            username,
+            password,
             loginIs
         } = this.state
 
@@ -66,22 +45,24 @@ class LoginScreen extends React.Component {
             return (
                 <div className="container d-flex flex-column justify-content-center align-items-center  mt-4 mb-2" style={{ width: 'auto' }}>
                     <h1 className="text-uppercase font-weight-bold" style={{ color: "green" }}>Login Page</h1>
+                    <p>username : {this.props.user.username}</p>
+                    <p>{this.props.user.errMsg}</p>
                     <div className="bg-grey">
                         <input type="text"
                             className="form-control p-2 mb-2"
                             name=""
                             id=""
                             placeholder="Username"
-                            value={usernameInput}
-                            onChange={(e) => this.inputHandler(e, "usernameInput")}
+                            // value={usernameInput}
+                            onChange={(e) => this.inputHandler(e, "username")}
                         />
                         <input type="password"
                             className="form-control p-2 mb-2"
                             name=""
                             id=""
-                            value={passwordInput}
+                            // value={passwordInput}
                             placeholder="Password"
-                            onChange={(e) => this.inputHandler(e, "passwordInput")}
+                            onChange={(e) => this.inputHandler(e, "password")}
                         />
                         <center>
                             {/* <Link to='/home'> */}
@@ -101,7 +82,7 @@ class LoginScreen extends React.Component {
             )
         } else {
             return (
-                <Redirect to={'/home/' + usernameInput} />
+                <Redirect to={'/home/' + username} />
             )
 
         }
@@ -111,18 +92,18 @@ class LoginScreen extends React.Component {
 }
 const mapStateToProps = (state) => {
     return {
-      todo: state.haha,
+    //   todo: state.haha,
       user: state.user,
     };
   };
   
-  // Supaya action bisa diakses component lewat props
-  // dan action bisa berhubungan dengan reducer
+
   const mapDispatchToProps = {
-    onChangeTodo: todoInputHandler,
+    // onChangeTodo: todoInputHandler,
     onChangeUsername: usernameInputHandler,
-    onLogin : getUsernameHandler
+    onLogin : getUsernameHandler,
     // onAddTodo: addTodoHandler,
+    onLogin : loginHendler
   };
   
   export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

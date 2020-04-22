@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, withRouter } from "react-router-dom"
 
+import Cookie from "universal-cookie"
+
 import logo from './logo.svg';
 import './App.css';
 import NewScreen from './views/screen/NewScreen';
@@ -28,12 +30,13 @@ import ProfileScreen from './views/screen/ProfileScreen';
 import RegisScreen from './views/screen/RegisScreen';
 import LoginScreen from './views/screen/LoginScreen';
 import TodoReduxScreen from './views/screen/TodoReduxScreen';
+import Cookies from 'universal-cookie';
 
 
+const cookieObject = new Cookie()
 
-
-function App() {
-  // render array 
+class App extends React.Component {
+    // render array 
   // let arr = ['Bandung', 'Jakarta', 'Tangerang'];
 
   // menggunakan objek 
@@ -171,8 +174,7 @@ function App() {
   // {/* <ProductCard/> */}
   // {renderProduct()}
   //===================
-
-
+render() {
   return (
     // <div>
     //   <div className="App">
@@ -228,7 +230,7 @@ function App() {
         <Route exact path="/login" component={LoginScreen} />
         <Route exact path="/home/:username" component={HomeScreen} />
         <Route exact path="/input" component={Inputscreen}/>
-        {/* <Route exact path="/todo" component={TodoReduxScreen}/> */}
+        <Route exact path="/todo" component={TodoReduxScreen}/>
         <Route exact path="/*" component={PageNotFound} />
         
 
@@ -236,6 +238,13 @@ function App() {
     </>
 
   );
+}
+
+  
   //========================
 }
+
+
+
+
 export default withRouter(App);

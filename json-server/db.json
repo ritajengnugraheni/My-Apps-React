@@ -22,34 +22,6 @@
       "role": "User",
       "fullname": "Rita Ajeng Nugraheni",
       "id": 3
-    },
-    {
-      "username": "sidikkunto",
-      "password": "sidikunto",
-      "role": "Supervisor",
-      "fullname": "Sidik Kunto Bisono",
-      "id": 4
-    },
-    {
-      "username": "mulatwening",
-      "password": "password",
-      "role": "User",
-      "fullname": "Mulat Wening Astuti",
-      "id": 5
-    },
-    {
-      "username": "hallo",
-      "password": "password",
-      "role": "user",
-      "fullname": "hallokitty",
-      "id": 6
-    },
-    {
-      "username": "agus",
-      "password": "password",
-      "role": "Spv",
-      "fullname": "Agus Sidik",
-      "id": 7
     }
   ]
 }

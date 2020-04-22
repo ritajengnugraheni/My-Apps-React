@@ -10,7 +10,7 @@ class Navbar extends React.Component {
                 <Link style={{color:"green"}} to="/login" >Login</Link>
                 {/* <Link to="/counter" >Counter</Link>
                 <Link to="/profil/:username" >Profile</Link> */}
-                {this.props.user.usernameInput}
+                {this.props.user.username}
             </div>
         )
     }
