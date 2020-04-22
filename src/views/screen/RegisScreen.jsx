@@ -37,6 +37,12 @@ class RegisScreen extends React.Component {
             role
         }
         this.props.onRegis(userData)
+        this.setState ({
+            usernameInput:"",
+            passwordInput:"",
+            fullnameInput:"",
+            roleInput:""
+        })
         // this.setState({ isLoading: true });
         // const { usernameInput } = this.state
         // setTimeout(() => {
