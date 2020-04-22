@@ -55,48 +55,49 @@ export const registerHandler = (userData) => {
                 username,
             }
         })
-            .then(res => {
+ .then(res => {
 
-                if (username && password && fullname && role == " ") {
-                    dispatch({
-                        type: "ON_REGISTER_FAIL2",
-                        payload: "Username tidak boleh kosong!"
+            if (username && password && fullname && role != "") {
+                if (res.data.length == 0) {
+                    Axios.post(`${API_URL}/users`, {
+                        username,
+                        password,
+                        role,
+                        fullname,
                     })
+
+                        .then(res => {
+                            dispatch({
+                                type: "ON_REGISTER_SUCCESS",
+                                payload: res.data
+                            })
+                            console.log(res);
+
+                        })
+                        .catch(err => {
+                            console.log(err);
+
+                        })
+
                 } else {
-                    if (res.data.length == 0) {
-                        Axios.post(`${API_URL}/users`, {
-                            username,
-                            password,
-                            role,
-                            fullname,
-                        })
-
-                            .then(res => {
-                                dispatch({
-                                    type: "ON_REGISTER_SUCCESS",
-                                    payload: res.data
-                                })
-                                console.log(res);
-
-                            })
-                            .catch(err => {
-                                console.log(err);
-
-                            })
-
-                    } else {
-                        dispatch({
-                            type: "ON_REGISTER_FAIL",
-                            payload: "Username sudah ada"
-                        })
-                    }
+                    dispatch({
+                        type: "ON_REGISTER_FAIL",
+                        payload: "Username sudah ada"
+                    })
                 }
-            })
+              
+            } else {
+                dispatch({
+                    type: "ON_REGISTER_FAIL2",
+                    payload: "Username tidak boleh kosong!"
+                })
+            }
+        })
 
-            .catch(err => {
-                console.log(err);
+        .catch(err => {
+            console.log(err);
 
-            })
+        })
 
-    }
+}
 }
