@@ -55,9 +55,8 @@ class LoginScreen extends React.Component {
         if (this.props.user.id) {
             cookieObject.set("authData", JSON.stringify(this.props.user))
         } 
-            // biar mau kembali ke login 
-            // cookieObject.remove("authData", JSON.stringify(this.props.user))
-        // }
+           
+       
     }
 
     render() {
