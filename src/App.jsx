@@ -30,13 +30,15 @@ import ProfileScreen from './views/screen/ProfileScreen';
 import RegisScreen from './views/screen/RegisScreen';
 import LoginScreen from './views/screen/LoginScreen';
 import TodoReduxScreen from './views/screen/TodoReduxScreen';
-import Cookies from 'universal-cookie';
+import cookie from 'universal-cookie';
+import { connect } from 'react-redux'
+import { userKeepLogin} from "./redux/actions"
 
 
-const cookieObject = new Cookie()
+const cookieObject = new cookie()
 
 class App extends React.Component {
-    // render array 
+  // render array 
   // let arr = ['Bandung', 'Jakarta', 'Tangerang'];
 
   // menggunakan objek 
@@ -174,77 +176,104 @@ class App extends React.Component {
   // {/* <ProductCard/> */}
   // {renderProduct()}
   //===================
-render() {
-  return (
-    // <div>
-    //   <div className="App">
-    //          <div class="container " >
-    //                 <nav className="fixed-top navbar-expand-sm bg-light ">
-    //                    <div className="col-12 col-md-12  d-xl-block">
-    //                     <div className="row align-items-center navigasi">
-    //                             <div className="col-md-12 mb-2 order-md-1 mb-lg-0">
-    //                                <h1 style={{ color: '#0a8fb4', marginTop:'20px'}} className='font-weight-bold'><span style={{fontSize: '30px'}}>&#128218;</span> Book Store <span style={{fontSize:'30px'}}>&#128218;</span></h1>
-    //                             </div>                 
-    //                     </div>
-    //                    </div>    
-    //                 </nav>
-    //         </div>       
 
-    //   </div>
-    //   <div style={{marginLeft:'10px', marginTop:'120px'}}>
-    //      <div className="row"> {renderBuku()}
-    //        </div>
-    //   </div>
-    // </div>
-
-    // Counter screen 
-    // <div className="App">
-    //   <CounterScreen/>
-    // </div>
-
-    // input screen 
-    // <div className="App">
-    //   <Inputscreen/>
-    // </div>
+  componentDidMount() {
+    let cookieResult = cookieObject.get("authData")
+    console.log(cookieResult);
+    if (cookieResult) {
+      this.props.userKeepLogin(cookieResult)
+    }
+  }
 
 
-    // // <div className="App">
-    //   {/* <h1 className='font-weight-bold' style={{color: 'grey'}}>Halloo World</h1> */}
-    //   {/* <LoginScreen/> */}
-    //   {/* <AuthScreen/> */}
-    //   {/* <LifecycleScreen/> */}
 
-    // // </div>
 
-    <>
-      {/* <LifecycleScreen/> */}
-      {/* <HomeScreen/> */}
-      <Navbar />
-      <Switch>
-        {/* <Route exact path="/" component={HomeScreen}/>
+  render() {
+    return (
+      // <div>
+      //   <div className="App">
+      //          <div class="container " >
+      //                 <nav className="fixed-top navbar-expand-sm bg-light ">
+      //                    <div className="col-12 col-md-12  d-xl-block">
+      //                     <div className="row align-items-center navigasi">
+      //                             <div className="col-md-12 mb-2 order-md-1 mb-lg-0">
+      //                                <h1 style={{ color: '#0a8fb4', marginTop:'20px'}} className='font-weight-bold'><span style={{fontSize: '30px'}}>&#128218;</span> Book Store <span style={{fontSize:'30px'}}>&#128218;</span></h1>
+      //                             </div>                 
+      //                     </div>
+      //                    </div>    
+      //                 </nav>
+      //         </div>       
+
+      //   </div>
+      //   <div style={{marginLeft:'10px', marginTop:'120px'}}>
+      //      <div className="row"> {renderBuku()}
+      //        </div>
+      //   </div>
+      // </div>
+
+      // Counter screen 
+      // <div className="App">
+      //   <CounterScreen/>
+      // </div>
+
+      // input screen 
+      // <div className="App">
+      //   <Inputscreen/>
+      // </div>
+
+
+      // // <div className="App">
+      //   {/* <h1 className='font-weight-bold' style={{color: 'grey'}}>Halloo World</h1> */}
+      //   {/* <LoginScreen/> */}
+      //   {/* <AuthScreen/> */}
+      //   {/* <LifecycleScreen/> */}
+
+      // // </div>
+
+      <>
+        {/* <LifecycleScreen/> */}
+        {/* <HomeScreen/> */}
+        <Navbar />
+        <Switch>
+          {/* <Route exact path="/" component={HomeScreen}/>
         <Route exact path="/auth" component={AuthScreen}/>
         <Route exact path="/input" component={Inputscreen}/>
         <Route exact path="/counter" component={CounterScreen}/>
         <Route exact path="/profil/:username" component={ProfileScreen}/> */}
-        <Route exact path="/regis" component={RegisScreen} />
-        <Route exact path="/login" component={LoginScreen} />
-        <Route exact path="/home/:username" component={HomeScreen} />
-        <Route exact path="/input" component={Inputscreen}/>
-        <Route exact path="/todo" component={TodoReduxScreen}/>
-        <Route exact path="/*" component={PageNotFound} />
-        
+          <Route exact path="/regis" component={RegisScreen} />
+          <Route exact path="/login" component={LoginScreen} />
+          <Route exact path="/home/:username" component={HomeScreen} />
+          <Route exact path="/input" component={Inputscreen} />
+          <Route exact path="/todo" component={TodoReduxScreen} />
+          <Route exact path="/*" component={PageNotFound} />
 
-      </Switch>
-    </>
 
-  );
-}
+        </Switch>
+      </>
 
-  
+    );
+  }
+
+
   //========================
 }
 
 
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+  };
+};
+
+const mapDispatchToProps = {
+  // onChangeTodo: todoInputHandler,
+  // onChangeUsername: usernameInputHandler,
+  // onLogin : getUsernameHandler,
+  // onAddTodo: addTodoHandler,
+  userKeepLogin,
+ 
+
+};
 
 
-export default withRouter(App);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));

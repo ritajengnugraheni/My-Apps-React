@@ -1,5 +1,6 @@
 import Axios from "axios";
 import { API_URL } from "../../constants/API"
+import swal from "sweetalert";
 
 
 export const usernameInputHandler = (text) => {
@@ -55,49 +56,95 @@ export const registerHandler = (userData) => {
                 username,
             }
         })
- .then(res => {
+            .then(res => {
 
-            if (username && password && fullname && role != "") {
-                if (res.data.length == 0) {
-                    Axios.post(`${API_URL}/users`, {
-                        username,
-                        password,
-                        role,
-                        fullname,
-                    })
+                if (username && password && fullname && role != "") {
+                    if (res.data.length == 0) {
+                        Axios.post(`${API_URL}/users`, {
+                            username,
+                            password,
+                            role,
+                            fullname,
+                        })
 
-                        .then(res => {
-                            dispatch({
-                                type: "ON_REGISTER_SUCCESS",
-                                payload: res.data
+                            .then(res => {
+                                dispatch({
+                                    type: "ON_REGISTER_SUCCESS",
+                                    payload: res.data
+                                })
+                                console.log(res);
+
                             })
-                            console.log(res);
+                            .catch(err => {
+                                console.log(err);
 
-                        })
-                        .catch(err => {
-                            console.log(err);
+                            })
 
+                    } else {
+                        dispatch({
+                            type: "ON_REGISTER_FAIL",
+                            payload: "Username sudah ada"
                         })
+                    }
 
                 } else {
                     dispatch({
                         type: "ON_REGISTER_FAIL",
-                        payload: "Username sudah ada"
+                        payload: "Username tidak boleh kosong!"
                     })
                 }
-              
-            } else {
-                dispatch({
-                    type: "ON_REGISTER_FAIL2",
-                    payload: "Username tidak boleh kosong!"
-                })
+            })
+
+            .catch(err => {
+                console.log(err);
+
+            })
+
+    }
+}
+
+export const userKeepLogin = (userData) => {
+    return dispatch => {
+        Axios.get(`${API_URL}/users`, {
+            params: {
+                id: userData.id
             }
         })
+            .then(res => {
+                if (res.data.length > 0) {
+                    dispatch({
+                        type: "ON_LOGIN_SUCCESS",
+                        payload: res.data[0]
+                    })
+                    swal("Sukses", "", "success")
+                } else {
+                    dispatch({
+                        type: "ON_LOGIN_FAIL",
+                        payload: "Username atau password salah"
+                    })
+                    swal("Username atau password salah", "", "error")
+                }
 
-        .catch(err => {
-            console.log(err);
+                // console.log(res);
 
-        })
 
+            })
+            .catch(err => {
+                console.log(err);
+
+            })
+    }
 }
+
+export const logoutHandler = () => {
+
+    return dispatch => {
+        dispatch({
+            type: "ON_LOGOUT",
+            payload: "",
+        })
+        swal("logout", " ", "warning")
+
+    }
+
 }
