@@ -25,6 +25,8 @@ class LoginScreen extends React.Component {
     inputHandler = (e, field) => {
         this.setState({ [field]: e.target.value });
     };
+
+    // Masih agak kurang paham
     getDataHandler = () => {
         const { username, password } = this.state
 
@@ -34,8 +36,16 @@ class LoginScreen extends React.Component {
         }
 
         this.props.onLogin(userData)
+        
+        this.setState ({
+            usernameInput :"",
+            passwordInput: ""
+
+        })
 
     }
+    //====================================
+
     //============== belajar cookie ===========
     // 1. Login dan ubah global state user menjadi data user 
     //   -> id, username, role , fullname 
@@ -52,7 +62,7 @@ class LoginScreen extends React.Component {
 
     componentDidUpdate() {
         // jika  this.props.user.id ada isi, berarti data seseorang sudah ada pada global state 
-        if (this.props.user.id) {
+        if (this.props.user.id) { // jika menggunakan . username pun juga bisa 
             cookieObject.set("authData", JSON.stringify(this.props.user))
         } 
            
@@ -61,9 +71,8 @@ class LoginScreen extends React.Component {
 
     render() {
         const {
-            username,
-            // password,
-            loginIs
+           usernameInput,
+           passwordInput
         } = this.state
 
         if (!this.props.user.id) {
@@ -78,14 +87,14 @@ class LoginScreen extends React.Component {
                             name=""
                             id=""
                             placeholder="Username"
-                            // value={usernameInput}
+                            value={usernameInput}
                             onChange={(e) => this.inputHandler(e, "username")}
                         />
                         <input type="password"
                             className="form-control p-2 mb-2"
                             name=""
                             id=""
-                            // value={passwordInput}
+                            value={passwordInput}
                             placeholder="Password"
                             onChange={(e) => this.inputHandler(e, "password")}
                         />

@@ -138,13 +138,17 @@ export const userKeepLogin = (userData) => {
 
 export const logoutHandler = () => {
 
-    return dispatch => {
-        dispatch({
-            type: "ON_LOGOUT",
-            payload: "",
-        })
-        swal("logout", " ", "warning")
+    // return dispatch => {
+    //     dispatch({
+    //         type: "ON_LOGOUT",
+    //         payload: "", // tidak usah di tulis tidak apa2 katena memang kosong 
+    //     })
+    //     swal("logout", " ", "warning")
 
+    // }
+    // cookie bisa dihapus dalam sini menggunakan cookieobj.remove("auth")
+    return {
+        type : "ON_LOGOUT"
     }
 
 }
